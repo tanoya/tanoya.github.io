@@ -1,0 +1,16 @@
+[
+    {
+        "title": "Hello World - 我的第一篇文章",
+        "file": "posts/hello-world.md",
+        "date": "2026-04-13",
+        "summary": "这是我的第一篇博客文章，记录了搭建这个网站的过程和心得。",
+        "tags": ["随笔", "建站"]
+    },
+    {
+        "title": "关于我",
+        "file": "posts/about-me.md",
+        "date": "2026-04-13",
+        "summary": "一份简单的自我介绍，聊聊我的兴趣和技术栈。",
+        "tags": ["自我介绍"]
+    }
+]
