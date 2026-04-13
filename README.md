@@ -1,4 +1,4 @@
-# Tanoya's Blog
+# Darcy's Blog
 
 一个基于 GitHub Pages 的个人博客，使用纯前端方案，Markdown 编写文章，无需构建工具。
 

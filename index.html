@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tanoya's Blog</title>
+    <title>Darcy's Blog</title>
     <style>
         /* ===== CSS Reset & Variables ===== */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -180,14 +180,130 @@
         }
         .empty svg { width: 80px; height: 80px; margin-bottom: 16px; opacity: 0.4; }
 
-        /* ===== Footer ===== */
+        /* ===== Footer (gradient matching header) ===== */
         .footer {
             text-align: center;
             padding: 30px 20px;
+            color: rgba(255,255,255,0.8);
+            font-size: 0.85rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin-top: 40px;
+        }
+
+        /* ===== Tag Filter ===== */
+        .filter-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+        .filter-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        .filter-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .filter-tag {
+            background: var(--card-bg);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition);
+            user-select: none;
+        }
+        .filter-tag:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        .filter-tag.active {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+
+        /* ===== Search Bar ===== */
+        .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+        .search-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 16px;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            font-size: 0.9rem;
+            color: var(--text);
+            background: var(--card-bg);
+            outline: none;
+            transition: all var(--transition);
+        }
+        .search-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(52,152,219,0.15);
+        }
+        .search-input::placeholder { color: #adb5bd; }
+
+        /* ===== Date Filter ===== */
+        .date-filter {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+        .date-filter label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        .date-input {
+            padding: 7px 12px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text);
+            background: var(--card-bg);
+            outline: none;
+            transition: all var(--transition);
+            font-family: inherit;
+        }
+        .date-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(52,152,219,0.15);
+        }
+        .date-separator {
             color: var(--text-secondary);
             font-size: 0.85rem;
-            border-top: 1px solid var(--border);
-            margin-top: 40px;
+        }
+        .date-clear {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 7px 14px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all var(--transition);
+            font-family: inherit;
+        }
+        .date-clear:hover {
+            border-color: #e74c3c;
+            color: #e74c3c;
         }
 
         /* ===== Loading ===== */
@@ -215,6 +331,9 @@
             .post-card { padding: 18px 20px; }
             .nav { gap: 12px; }
             .nav a { padding: 6px 12px; font-size: 0.9rem; }
+            .search-input { min-width: 100%; }
+            .date-filter { gap: 6px; }
+            .date-input { flex: 1; min-width: 0; }
         }
     </style>
 </head>
@@ -222,19 +341,38 @@
 
     <!-- Header -->
     <header class="header">
-        <h1>Tanoya</h1>
+        <h1>Darcy</h1>
         <p>Welcome to my personal space ✨</p>
     </header>
 
     <!-- Navigation -->
     <nav class="nav">
         <a href="index.html" class="active">首页</a>
-        <a href="https://github.com/tanoya" target="_blank">GitHub</a>
+        <a href="https://github.com/Darcy" target="_blank"><svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="vertical-align:-3px;margin-right:4px"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+        <a href="post.html?file=posts/about-me.md">关于我</a>
     </nav>
 
     <!-- Main Content -->
     <main class="container">
         <h2 class="section-title">📝 文章列表</h2>
+
+        <!-- Search -->
+        <div class="search-bar">
+            <input type="text" class="search-input" id="search-input" placeholder="🔍 搜索文章标题...">
+        </div>
+
+        <!-- Date Filter -->
+        <div class="date-filter">
+            <label>📅 日期筛选：</label>
+            <input type="date" class="date-input" id="date-from">
+            <span class="date-separator">至</span>
+            <input type="date" class="date-input" id="date-to">
+            <button class="date-clear" id="date-clear">清除</button>
+        </div>
+
+        <!-- Tag Filter -->
+        <div id="filter-bar"></div>
+
         <div id="post-list">
             <div class="loading">
                 <div class="spinner"></div>
@@ -245,28 +383,60 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <p>&copy; 2026 Tanoya · Powered by Markdown &amp; GitHub Pages</p>
+        <p>&copy; 2026 Darcy · Powered by Markdown &amp; GitHub Pages</p>
     </footer>
 
     <script>
         (async function () {
             const container = document.getElementById('post-list');
+            const filterBar = document.getElementById('filter-bar');
+            const searchInput = document.getElementById('search-input');
+            const dateFrom = document.getElementById('date-from');
+            const dateTo = document.getElementById('date-to');
+            const dateClear = document.getElementById('date-clear');
 
-            try {
-                const resp = await fetch('posts.json');
-                if (!resp.ok) throw new Error('无法加载 posts.json');
-                const posts = await resp.json();
+            let activeTag = null;
+            let allPosts = [];
 
-                // Sort by date descending
-                posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+            function getFilteredPosts() {
+                let posts = allPosts;
 
+                // Tag filter
+                if (activeTag) {
+                    posts = posts.filter(p => (p.tags || []).includes(activeTag));
+                }
+
+                // Search filter
+                const keyword = searchInput.value.trim().toLowerCase();
+                if (keyword) {
+                    posts = posts.filter(p => p.title.toLowerCase().includes(keyword));
+                }
+
+                // Date filter
+                const from = dateFrom.value;
+                const to = dateTo.value;
+                if (from) {
+                    posts = posts.filter(p => p.date >= from);
+                }
+                if (to) {
+                    posts = posts.filter(p => p.date <= to);
+                }
+
+                return posts;
+            }
+
+            function applyFilters() {
+                renderPosts(getFilteredPosts());
+            }
+
+            function renderPosts(posts) {
                 if (posts.length === 0) {
                     container.innerHTML = `
                         <div class="empty">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                                 <path d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/>
                             </svg>
-                            <p>暂无文章，快去添加第一篇吧！</p>
+                            <p>没有找到匹配的文章</p>
                         </div>`;
                     return;
                 }
@@ -294,6 +464,57 @@
 
                 container.innerHTML = '';
                 container.appendChild(list);
+            }
+
+            function renderFilterBar(posts) {
+                const tagSet = new Set();
+                posts.forEach(p => (p.tags || []).forEach(t => tagSet.add(t)));
+                const tags = [...tagSet].sort();
+
+                if (tags.length === 0) {
+                    filterBar.innerHTML = '';
+                    return;
+                }
+
+                let html = '<div class="filter-bar"><span class="filter-label">🏷️ 标签筛选：</span><div class="filter-tags">';
+                html += `<span class="filter-tag${!activeTag ? ' active' : ''}" data-tag="">全部</span>`;
+                tags.forEach(t => {
+                    html += `<span class="filter-tag${activeTag === t ? ' active' : ''}" data-tag="${t}">${t}</span>`;
+                });
+                html += '</div></div>';
+                filterBar.innerHTML = html;
+
+                filterBar.querySelectorAll('.filter-tag').forEach(el => {
+                    el.addEventListener('click', () => {
+                        const tag = el.dataset.tag;
+                        activeTag = tag || null;
+                        renderFilterBar(allPosts);
+                        applyFilters();
+                    });
+                });
+            }
+
+            // Bind search event
+            searchInput.addEventListener('input', applyFilters);
+
+            // Bind date filter events
+            dateFrom.addEventListener('change', applyFilters);
+            dateTo.addEventListener('change', applyFilters);
+            dateClear.addEventListener('click', () => {
+                dateFrom.value = '';
+                dateTo.value = '';
+                applyFilters();
+            });
+
+            try {
+                const resp = await fetch('posts.json');
+                if (!resp.ok) throw new Error('无法加载 posts.json');
+                allPosts = await resp.json();
+
+                allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                renderFilterBar(allPosts);
+                renderPosts(allPosts);
             } catch (e) {
                 container.innerHTML = `
                     <div class="empty">
